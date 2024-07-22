@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spur Gear Center Distance Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+            background-color: #f0f8ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Spur Gear Center Distance Calculator</h2>
+        <label for="module">Module (m):</label>
+        <input type="number" id="module" step="0.01" required>
+
+        <label for="teeth1">Number of Teeth of First Gear (Z1):</label>
+        <input type="number" id="teeth1" required>
+
+        <label for="ratio">Gear Ratio (R):</label>
+        <input type="number" id="ratio" step="0.01" required>
+
+        <label for="angle">Pressure Angle (not used in calculation):</label>
+        <input type="number" id="angle" step="0.01">
+
+        <button onclick="calculateCenterDistance()">Calculate Center Distance</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateCenterDistance() {
+            const module = parseFloat(document.getElementById('module').value);
+            const teeth1 = parseInt(document.getElementById('teeth1').value);
+            const ratio = parseFloat(document.getElementById('ratio').value);
+            // const angle = parseFloat(document.getElementById('angle').value); // Not used in calculation
+
+            const teeth2 = teeth1 * ratio;
+            const centerDistance = (module * (teeth1 + teeth2)) / 2;
+
+            document.getElementById('result').innerHTML = `
+                <p>Number of Teeth of Second Gear (Z2): ${teeth2}</p>
+                <p>Center Distance (C): ${centerDistance.toFixed(2)}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
